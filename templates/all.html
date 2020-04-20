@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block content %}
+        <div class="layui-row">
+        <ul class="layui-nav">
+          <li class="layui-nav-item">
+            <a href="">控制台<span class="layui-badge">9</span></a>
+          </li>
+          <li class="layui-nav-item">
+            <a href="">个人中心<span class="layui-badge-dot"></span></a>
+          </li>
+          <li class="layui-nav-item">
+            <a href=""><img src="//t.cn/RCzsdCq" class="layui-nav-img">我</a>
+            <dl class="layui-nav-child">
+              <dd><a href="javascript:;">修改信息</a></dd>
+              <dd><a href="javascript:;">安全管理</a></dd>
+              <dd><a href="javascript:;">退了</a></dd>
+            </dl>
+          </li>
+        </ul>
+    </div>
+
+    <div class="layui-row">
+        <ul class="layui-nav layui-nav-tree layui-nav-side" lay-filter="test" style="margin-top: 58px";>
+        <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
+          <li class="layui-nav-item layui-nav-itemed">
+            <a href="javascript:;">库存管理</a>
+            <dl class="layui-nav-child">
+              <dd><a href="javascript:;">库存总览</a></dd>
+              <dd><a href="javascript:;">入库管理</a></dd>
+              <dd><a href="javascript:;">出库管理</a></dd>
+            </dl>
+          </li>
+          <li class="layui-nav-item layui-nav-itemed">
+            <a href="javascript:;">历史记录</a>
+            <dl class="layui-nav-child">
+              <dd><a href="javascript:">出库历史</a></dd>
+              <dd><a href="">入库历史</a></dd>
+            </dl>
+          </li>
+          <li class="layui-nav-item"><a href="">用户中心</a></li>
+        </ul>
+    </div>
+
+    <div class="layui-container" style="margin-left: 185px">
+        <blockquote class="layui-elem-quote">
+            <h1>仓库管理</h1>
+        </blockquote>
+        {# 查询货物模块 #}
+        <form action="/search_item" method="get">
+            <input placeholder="货号" name="q" id="q">
+            <input type="submit" class="layui-btn" value="搜索">
+        </form>
+
+        {# 显示所有学生模块 #}
+        <table class="layui-table">
+      <colgroup>
+        <col width="150">
+        <col width="200">
+        <col>
+      </colgroup>
+      <thead>
+        <tr>
+            <th>项目号</th>
+            <th>编号</th>
+            <th>类别</th>
+            <th>型号</th>
+            <th>描述</th>
+            <th>数量</th>
+            <th>照片</th>
+            <th>Vendor</th>
+            <th>货期</th>
+            <th>成本</th>
+            <th>链接</th>
+            <th>备注</th>
+        </tr>
+      </thead>
+      <tbody>
+        {%for admin in data%}
+            <tr>
+                <td>{{admin.projectid}}</td>
+                <td>{{admin.itemNo}}</td>
+                <td>{{admin.type}}</td>
+                <td>{{admin.partNo}}</td>
+                <td>{{admin.description}}</td>
+                <td>{{admin.quantity}}</td>
+                <td>
+                    <img src="{{ admin.image }}" height="50px">
+                </td>
+                <td>{{admin.Vendor}}</td>
+                <td>{{admin.period}}</td>
+                <td>{{admin.cost}}</td>
+                <td>{{admin.link}}</td>
+                <td>{{admin.comment}}</td>
+                <td>
+                    {# 修改学生模块 #}
+                    <a href="/get/{{ admin.id }}" class="layui-btn layui-btn-normal">
+                        <i class="layui-icon">&#xe642;</i>修改
+                    </a>
+                </td>
+                <td>
+                    {# 删除学生模块 #}
+                    <a href="/delete/{{ admin.id }}" class="layui-btn layui-btn-danger">
+                        <i class="layui-icon">&#xe640;</i>删除
+                    </a>
+                </td>
+            </tr>
+        {%endfor%}
+      </tbody>
+        </table>
+
+        {# 添加学生模块 #}
+        <a href="/add" class="layui-btn layui-btn-warm">
+            <i class="layui-icon">&#xe654;</i> 添加
+        </a>
+    </div>
+{% endblock %}

@@ -21,7 +21,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('index/',views.index),
     path('base/',views.base),
-    path('all/',views.all_page),
-    path('add/',views.add),
-    path('test/',views.test),
+    path('test/', views.test),
+    path('stockList/', views.stockList),
+    path('stockIn/',views.stockIn),
+    path('stockOut/', views.stockOut),
+    path('stocklistview/',views.stocklistview),
+    path('orderList/', views.orderList),
 ]
